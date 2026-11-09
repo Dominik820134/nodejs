@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "description": "Mlijeko",
+    "amount": 2
+  },
+  {
+    "id": 2,
+    "description": "Kruh",
+    "amount": 2.5
+  }
+]

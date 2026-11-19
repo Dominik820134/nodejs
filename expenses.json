@@ -1,12 +1,17 @@
 [
   {
-    "id": 1,
+    "id": 2,
     "description": "Mlijeko",
     "amount": 2
   },
   {
-    "id": 2,
+    "id": 3,
     "description": "Kruh",
     "amount": 2.5
+  },
+  {
+    "id": 4,
+    "description": "Sardine",
+    "amount": 2
   }
 ]

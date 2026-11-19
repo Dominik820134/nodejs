@@ -10,7 +10,7 @@ const [command, arg1, arg2] = process.argv.slice(2);  // <-polje
 
 let expenses;
 try {
-    expenses = loadExpenses();
+    expenses = await loadExpenses();
 } catch (error) {
     console.error(`Datoteka expenses.json nije ispravna: ${error.message}`);
     process.exit(1);
@@ -21,7 +21,7 @@ switch (command) {
     case "add":
         const amount = Number(arg2); NaN
         if (arg1 === undefined || Number.isNaN(amount)) {
-            console.error("Kroištenje: add 'opis' iznos");
+            console.error("Korištenje: add 'opis' iznos");
             process.exit(1);
         }
 
@@ -32,7 +32,7 @@ switch (command) {
 
         expenses.push({id: newId, description: arg1, amount: amount});
 
-        saveExpenses(expenses);
+        await saveExpenses(expenses);
 
         console.log(`Dodano: ${arg1} (id: ${newId})`);
         break;
@@ -55,6 +55,25 @@ switch (command) {
         }
         console.log(`Ukupno: ${total} ${currency}`);
 
+        break;
+
+    case "remove":
+
+        const id = Number(arg1);
+
+        if (Number.isNaN(id)) {
+            console.error("Korištenje: remove broj");
+            process.exit(1);
+        }
+
+        const kept = expenses.filter((expense) => expense.id !== id);
+        if (kept.length === expenses.length) {
+            console.error(`Trošak broj ${id} ne postoji.`);
+            process.exit(1);
+        }
+
+        await saveExpenses(kept);
+        console.log(`Obrisan je trošak broj ${id}.`);
         break;
 
     default:
